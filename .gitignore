@@ -1,0 +1,4 @@
+etc/
+__pycache__/
+*tempCodeRunnerFile.py
+results/
