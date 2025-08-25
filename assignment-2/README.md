@@ -1,4 +1,6 @@
 # Assignment 2: Edge Detection and Circle Detection
+**Author:** Fraidakis Ioannis  
+**Date:** May 2025  
 
 This assignment implements and compares edge detection algorithms followed by circular Hough transform for geometric shape detection. It demonstrates the complete pipeline from low-level feature extraction to high-level object recognition.
 
@@ -26,11 +28,11 @@ assignment-2/
 │   └── sobel/                     # Sobel edge detection results
 └── src/
     ├── demo.py                    # Main demonstration script
-    ├── circ_hough.py             # Circular Hough transform implementation
-    ├── fir_conv.py               # Finite impulse response convolution
-    ├── log_edge.py               # Laplacian of Gaussian edge detection
-    ├── result_refinement.py      # Non-maximum suppression utilities
-    └── sobel_edge.py             # Sobel edge detection implementation
+    ├── circ_hough.py              # Circular Hough transform implementation
+    ├── fir_conv.py                # Finite impulse response convolution
+    ├── log_edge.py                # Laplacian of Gaussian edge detection
+    ├── result_refinement.py       # Post-processing utilities
+    └── sobel_edge.py              # Sobel edge detection implementation
 ```
 
 ## Algorithms Implemented
@@ -70,14 +72,14 @@ Gx = [[-1, 0, 1],      Gy = [[-1, -2, -1],
 The LoG operator combines Gaussian smoothing with Laplacian second-derivative computation for robust edge detection.
 
 ```python
-def log_edge(in_img_array: np.ndarray, sigma: float) -> np.ndarray:
+def log_edge(in_img_array: np.ndarray, kernel_size: int) -> np.ndarray:
     """
     Detects edges using Laplacian of Gaussian operator.
     
     Args:
         in_img_array: Input grayscale image [0, 1]
-        sigma: Standard deviation of Gaussian kernel
-    
+        kernel_size: Size of the Gaussian kernel (must be odd)
+
     Returns:
         Binary edge map from zero-crossing detection
     """
@@ -86,12 +88,6 @@ def log_edge(in_img_array: np.ndarray, sigma: float) -> np.ndarray:
 **Key Features:**
 - **Scale-Space Analysis**: Multi-scale edge detection with varying σ values
 - **Zero-Crossing Detection**: Identifying sign changes in the Laplacian response
-- **Kernel Size Optimization**: Automatic kernel sizing based on σ parameter
-
-**LoG Mathematical Foundation:**
-```
-LoG(x,y) = -1/(πσ⁴) * [1 - (x² + y²)/(2σ²)] * exp(-(x² + y²)/(2σ²))
-```
 
 ### 3. Circular Hough Transform
 
@@ -99,7 +95,7 @@ The circular Hough transform detects circles by mapping edge pixels to parameter
 
 ```python
 def circ_hough(in_img_array: np.ndarray, R_max: float, dim: np.ndarray, 
-               V_min: int, R_min: float = 1) -> tuple:
+               V_min: int, R_min: float) -> tuple:
     """
     Detects circles using the Hough transform in parameter space.
     
@@ -118,78 +114,9 @@ def circ_hough(in_img_array: np.ndarray, R_max: float, dim: np.ndarray,
 **Key Features:**
 - **3D Parameter Space**: (x_center, y_center, radius) accumulator
 - **Voting Mechanism**: Each edge pixel votes for possible circle parameters
-- **Non-Maximum Suppression**: Advanced post-processing to eliminate duplicate detections
+- **Non-Maximum Suppression**: Advanced post-processing to refine detections
 
-## Advanced Post-Processing
-
-### Non-Maximum Suppression (NMS)
-
-The implementation includes sophisticated NMS for eliminating redundant circle detections:
-
-```python
-def non_maximum_suppression(centers, radii, votes, 
-                          center_thresh, radius_thresh_perc):
-    """
-    Eliminates duplicate circle detections based on spatial and 
-    radius proximity criteria.
-    """
-```
-
-**NMS Criteria:**
-- **Spatial Distance**: Euclidean distance between circle centers
-- **Radius Similarity**: Percentage difference in circle radii
-- **Vote Priority**: Preserves circles with higher vote counts
-
-## Comprehensive Analysis Pipeline
-
-### 1. Sobel Edge Analysis
-- **Threshold Sweeping**: Systematic evaluation of threshold values (0.1 to 0.4)
-- **Edge Count Analysis**: Relationship between threshold and detected edge pixels
-- **Visual Comparison**: Side-by-side threshold comparison plots
-
-### 2. LoG Scale-Space Analysis  
-- **Multi-Scale Detection**: Testing σ values from 5 to 13
-- **Kernel Size Effects**: Analysis of computational vs. accuracy trade-offs
-- **Zero-Crossing Visualization**: Clear edge map generation
-
-### 3. Circle Detection Pipeline
-- **Parameter Optimization**: Systematic evaluation of Hough parameters
-- **Detection Validation**: Visual overlay of detected circles on original image
-- **Performance Metrics**: Vote count analysis and detection accuracy
-
-## Usage Instructions
-
-### Quick Start
-```bash
-# Navigate to the assignment directory
-cd assignment-2
-
-# Run the complete demonstration
-python src/demo.py
-```
-
-### Custom Image Processing
-```python
-from src.sobel_edge import sobel_edge
-from src.log_edge import log_edge
-from src.circ_hough import circ_hough
-
-# Load and preprocess your image
-gray_image = load_image('your_image.png')
-
-# Sobel edge detection
-sobel_edges = sobel_edge(gray_image, threshold=0.2)
-
-# LoG edge detection  
-log_edges = log_edge(gray_image, sigma=7)
-
-# Circle detection on edge map
-centers, radii, votes = circ_hough(sobel_edges, R_max=250, 
-                                  dim=np.array([100, 100, 50]), 
-                                  V_min=100)
-```
-
-### Parameter Tuning Guidelines
+## Parameter Tuning Guidelines
 
 **Sobel Thresholds:**
 - Low (0.1-0.15): Detects more edges, including noise
@@ -215,62 +142,40 @@ centers, radii, votes = circ_hough(sobel_edges, R_max=250,
    - Threshold comparison grid
    - Edge count vs. threshold analysis
 
+![Sobel Edge Detection Results](./results/sobel/all_sobel.png)
+
+<div align="center">
+  <img src="./results/sobel/all_sobel.png" width="80%" alt="Sobel Edge Detection Results"/>
+</div>
+
 2. **LoG Results** (`results/log/`):
    - Multi-scale edge detection results  
    - Kernel size comparison
    - Comprehensive scale-space visualization
+
+![LoG Edge Detection Results](./results/log/all_log.png)
 
 3. **Circle Detection** (`results/hough/`):
    - Detected circles overlaid on original image
    - Parameter-specific detection results
    - Comparative analysis between edge detectors
 
-### Performance Analysis
+<div align="center">
+  <img src="./results/hough/Sobel_Rmin110_Rmax250_Vmin230_NMSc0.9_NMSr0.2.png" width="45%" alt="Sobel-based Circle Detection"/>
+  <img src="./results/hough/LoG_Rmin110_Rmax250_Vmin68_NMSc0.9_NMSr0.2.png" width="45%" alt="LoG-based Circle Detection"/>
+</div>
 
-The assignment provides quantitative analysis including:
-- **Edge Density**: Percentage of pixels classified as edges
-- **Computational Efficiency**: Processing time comparisons
-- **Detection Accuracy**: Circle detection success rate
-- **Parameter Sensitivity**: Robustness analysis
+<div align="center">
+  <em>Circle detection results: Sobel-based (left) vs LoG-based (right) edge detection followed by Hough transform</em>
+</div>
 
-## Technical Requirements
-
-- **Python 3.7+**
-- **NumPy**: Numerical computations and array operations
-- **OpenCV**: Advanced computer vision operations
-- **Matplotlib**: Comprehensive visualization
-- **PIL/Pillow**: Image I/O operations
-- **SciPy**: Signal processing utilities
-
-## Key Learning Objectives
+## Academic Learning Objectives
 
 This assignment demonstrates:
-
 1. **Gradient-Based Edge Detection**: Understanding first-derivative operators
 2. **Scale-Space Theory**: Multi-scale image analysis with LoG operator
 3. **Parameter Space Voting**: Hough transform methodology
 4. **Post-Processing Techniques**: Non-maximum suppression and result refinement
-5. **Algorithm Comparison**: Evaluating different approaches objectively
-6. **Real-World Applications**: Complete detection pipeline implementation
-
-## Applications and Extensions
-
-The techniques implemented form the foundation for:
-
-- **Object Detection**: Geometric shape recognition in industrial inspection
-- **Medical Imaging**: Circular structure detection (cells, tumors, vessels)
-- **Autonomous Vehicles**: Traffic sign and obstacle detection
-- **Quality Control**: Automated inspection of circular components
-- **Robotics**: Visual navigation and object manipulation
-- **Astronomy**: Planetary and stellar object detection
-
-## Advanced Concepts Covered
-
-- **Convolution Theory**: Separable kernels and computational optimization
-- **Scale-Space Analysis**: Multi-resolution image understanding
-- **Parameter Space Transformation**: Mapping between image and feature spaces
-- **Statistical Voting**: Robust detection through accumulator arrays
-- **Post-Processing Pipelines**: Combining multiple algorithms for improved results
 
 ---
 

@@ -31,9 +31,8 @@ def plot_affinity_matrix(affinity_mat, img_name):
     plt.colorbar(im2, ax=axes[1], label='Affinity Value')
     
     plt.tight_layout()
-    save_comprehensive_results(plt, "demo2_affinity", img_name)
+    save_comprehensive_results(plt, "demo2", f"{img_name}_affinity_matrix")
     plt.show()
-
 def main():
     print("=== Demo 2: Complete Pipeline (Image-to-Graph + Spectral Clustering) ===")
     
@@ -53,7 +52,7 @@ def main():
         fig_input = plt.figure(figsize=(8, 6))
         plt.imshow(image)
         plt.axis('off')
-        save_comprehensive_results(plt, "demo2_input", img_name)
+        save_comprehensive_results(plt, "demo2", f"{img_name}_original")
         plt.close(fig_input)
         
         # Convert image to graph
@@ -113,7 +112,7 @@ def main():
         plt.tight_layout()
         
         # Save results using utility function
-        save_comprehensive_results(plt, "demo2", img_name)
+        save_comprehensive_results(plt, "demo2", f"{img_name}_clustering_results")
         plt.show()
             
     print("\n=== Demo 2 completed successfully! ===")

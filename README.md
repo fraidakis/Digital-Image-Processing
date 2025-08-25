@@ -1,7 +1,7 @@
 # Digital Image Processing Assignments 
 **Author:** Fraidakis Ioannis  
 **Institution:** Aristotle University of Thessaloniki  
-**Date:** 2025  
+**Date:** Spring 2025  
 
 ## Overview
 This repository contains three comprehensive assignments covering fundamental concepts and advanced techniques in digital image processing. Each assignment demonstrates key algorithms and methodologies used in computer vision and image analysis.
@@ -26,13 +26,13 @@ Digital-Image-Processing/
 
 ### [Assignment 2: Edge Detection and Circle Detection](./assignment-2/)
 - **Focus**: Edge detection using Sobel and Laplacian of Gaussian (LoG) filters, followed by circular Hough transform
-- **Algorithms**: Sobel edge detection, LoG edge detection, and circular Hough transform with non-maximum suppression
+- **Algorithms**: Sobel edge detection, LoG edge detection, and circular Hough transform
 - **Applications**: Object detection, feature extraction, and geometric shape recognition
 - **Key Concepts**: Gradient computation, convolution operations, and parameter space voting
 
 ### [Assignment 3: Image Segmentation](./assignment-3/)
 - **Focus**: Graph-based image segmentation using spectral clustering and normalized cuts
-- **Algorithms**: Spectral clustering, normalized cuts (recursive and non-recursive), and image-to-graph conversion
+- **Algorithms**: Spectral clustering and normalized cuts (recursive and non-recursive)
 - **Applications**: Object segmentation, region partitioning, and semantic image understanding
 - **Key Concepts**: Graph theory, eigenvalue decomposition, and affinity matrix construction
 
@@ -40,10 +40,12 @@ Digital-Image-Processing/
 
 - **Python 3.x**: Primary programming language
 - **NumPy**: Numerical computations and array operations
-- **OpenCV**: Computer vision operations
 - **Matplotlib**: Visualization and plotting
-- **SciPy**: Scientific computing and optimization
 - **PIL/Pillow**: Image processing and manipulation
+- **SciPy**: Scientific computing and optimization
+- **Scikit-learn**: Machine learning
+- **OpenCV**: Computer vision operations
+- **os, time**: Operating system and time-related functions
 
 ## Getting Started
 
@@ -55,7 +57,7 @@ Digital-Image-Processing/
 
 2. **Install dependencies**:
    ```bash
-   pip install numpy opencv-python matplotlib scipy pillow
+   pip install numpy matplotlib pillow scipy scikit-learn opencv-python
    ```
 
 3. **Navigate to any assignment directory**:
@@ -74,7 +76,6 @@ Digital-Image-Processing/
 - **Comprehensive Documentation**: Detailed docstrings and comments explaining algorithms
 - **Visual Results**: Generated plots and images demonstrating algorithm performance
 - **Quantitative Evaluation**: Metrics and performance analysis for objective assessment
-- **Professional Code Quality**: Clean, readable, and well-structured Python implementations
 
 ## Learning Outcomes
 
@@ -91,6 +92,7 @@ By working through these assignments, you will gain hands-on experience with:
 Each assignment folder contains detailed documentation including:
 - Assignment specifications
 - Implementation guidelines
+- Example usage
 
 For technical support or questions, please refer to the individual assignment README files.
 

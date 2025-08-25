@@ -1,4 +1,6 @@
 # Assignment 1: Histogram Processing and Modification
+**Author:** Fraidakis Ioannis  
+**Date:** April 2025  
 
 This assignment implements and compares different algorithms for histogram equalization and histogram matching, demonstrating fundamental techniques for image enhancement through intensity distribution manipulation.
 
@@ -91,49 +93,20 @@ def perform_hist_modification(img_array, hist_ref, mode='post-disturbance'):
 
 The implementation includes comprehensive metrics for objective performance assessment:
 
-### Earth Mover's Distance (EMD)
-- Measures histogram dissimilarity as optimal transport cost
+### Mean Squared Error (MSE)
+- Measures the average squared difference between achieved and target histograms
+- Sensitive to differences at all intensity levels
 - Lower values indicate better histogram matching
-- Provides intuitive interpretation of distribution differences
 
-### Mean Squared Error (MSE)  
-- Quantifies pixel-wise intensity differences
-- Evaluates preservation of image structure
-- Balances histogram accuracy with visual quality
+### Bhattacharyya Distance
+- Quantifies similarity between probability distributions
+- Less sensitive to outliers than MSE
+- Bounded between 0 (identical) and ∞ (completely different)
 
-### Chi-Square Distance
-- Statistical measure of histogram dissimilarity
-- Sensitive to bin-wise distribution differences
-- Useful for comparing histogram matching accuracy
-
-## Usage Instructions
-
-### Quick Start
-```bash
-# Navigate to the assignment directory
-cd assignment-1
-
-# Run the complete demonstration
-python src/demo.py
-```
-
-### Custom Processing
-```python
-from src.image_utils import load_image
-from src.hist_modif import perform_hist_eq, perform_hist_matching
-
-# Load your image
-img = load_image('path/to/your/image.jpg')
-
-# Perform histogram equalization
-eq_img = perform_hist_eq(img, mode='non-greedy')
-
-# Perform histogram matching with reference image
-ref_img = load_image('path/to/reference/image.jpg')
-matched_img = perform_hist_matching(img, ref_img, mode='greedy')
-```
-
-## Results and Analysis
+### Earth Mover's Distance (EMD)
+- Measures minimum cost to transform one histogram into another
+- Accounts for perceptual differences between intensity levels
+- Lower values indicate better histogram matching accuracy
 
 The assignment generates comprehensive visualizations including:
 
@@ -143,30 +116,21 @@ The assignment generates comprehensive visualizations including:
 - **Reference**: Ideal uniform distribution overlay
 - **Metrics**: Quantitative comparison of histogram approximation quality
 
+![Histogram Equalization Comparison](./results/images/histogram_equalization_comparison.png)
+
 ### Histogram Matching Results
 - **Input**: Source image histogram
 - **Target**: Reference image histogram  
 - **Output**: Matched images with resulting histograms
 - **Analysis**: Statistical evaluation of matching accuracy
 
-### Comparative Analysis
-- **Visual Comparison**: Side-by-side image comparisons
-- **Quantitative Metrics**: EMD, MSE, and Chi-Square measurements
-- **Algorithm Performance**: Strengths and limitations of each approach
+![Histogram Matching Comparison](./results/images/histogram_matching_comparison.png)
 
 ## Key Insights
 
 1. **Greedy Algorithm**: Fastest execution but may create artificial intensity clustering
 2. **Non-Greedy Algorithm**: Best balance between accuracy and visual quality
 3. **Post-Disturbance Algorithm**: Highest histogram matching accuracy but with computational overhead
-
-## Technical Requirements
-
-- **Python 3.7+**
-- **NumPy**: Numerical computations
-- **Matplotlib**: Visualization and plotting
-- **PIL/Pillow**: Image loading and manipulation
-- **SciPy**: Statistical distance calculations
 
 ## Academic Learning Objectives
 
@@ -176,15 +140,6 @@ This assignment demonstrates:
 - **Algorithm Comparison**: Evaluating trade-offs between different approaches
 - **Quantitative Evaluation**: Using metrics to assess algorithm performance objectively
 - **Visual Assessment**: Interpreting results through both statistical and perceptual analysis
-
-## Extensions and Applications
-
-The techniques implemented in this assignment form the foundation for:
-- **Adaptive Histogram Equalization**: Local contrast enhancement
-- **Color Histogram Matching**: Multi-channel image processing
-- **Real-time Enhancement**: Optimized implementations for video processing
-- **Medical Imaging**: Contrast improvement in diagnostic images
-- **Photography**: Automated exposure and contrast correction
 
 ---
 

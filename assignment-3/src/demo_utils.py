@@ -121,7 +121,7 @@ def save_comprehensive_results(fig, demo_name, image_name):
     demo_dir = os.path.join(results_dir, demo_name)
     os.makedirs(demo_dir, exist_ok=True)
     
-    output_path = os.path.join(demo_dir, f'{demo_name}_{image_name}_results.png')
+    output_path = os.path.join(demo_dir, f'{image_name}.png')
     fig.savefig(output_path, dpi=300, bbox_inches='tight')
     print(f"Saved results to: {output_path}")
     return output_path
