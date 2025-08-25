@@ -116,7 +116,15 @@ The assignment generates comprehensive visualizations including:
 - **Reference**: Ideal uniform distribution overlay
 - **Metrics**: Quantitative comparison of histogram approximation quality
 
-![Histogram Equalization Comparison](./results/images/histogram_equalization_comparison.png)
+<br>
+
+<div align="center">
+  <img src="./results/images/histogram_equalization_comparison.png" alt="Histogram Equalization Comparison"/>
+</div>
+
+<div align="center">
+  <em>Histogram equalization results comparing greedy, non-greedy, and post-disturbance algorithms</em>
+</div>
 
 ### Histogram Matching Results
 - **Input**: Source image histogram
@@ -124,7 +132,15 @@ The assignment generates comprehensive visualizations including:
 - **Output**: Matched images with resulting histograms
 - **Analysis**: Statistical evaluation of matching accuracy
 
-![Histogram Matching Comparison](./results/images/histogram_matching_comparison.png)
+<br>
+
+<div align="center">
+  <img src="./results/images/histogram_matching_comparison.png" alt="Histogram Matching Comparison"/>
+</div>
+
+<div align="center">
+  <em>Histogram matching results showing source, reference, and matched images with their corresponding histograms</em>
+</div>
 
 ## Key Insights
 

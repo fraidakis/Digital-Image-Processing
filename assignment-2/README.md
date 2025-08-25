@@ -142,23 +142,42 @@ def circ_hough(in_img_array: np.ndarray, R_max: float, dim: np.ndarray,
    - Threshold comparison grid
    - Edge count vs. threshold analysis
 
-![Sobel Edge Detection Results](./results/sobel/all_sobel.png)
+<br>
 
 <div align="center">
   <img src="./results/sobel/all_sobel.png" width="80%" alt="Sobel Edge Detection Results"/>
 </div>
+
+<div align="center">
+  <em>Sobel edge detection results with varying threshold values</em>
+</div>
+
+<br>
 
 2. **LoG Results** (`results/log/`):
    - Multi-scale edge detection results  
    - Kernel size comparison
    - Comprehensive scale-space visualization
 
-![LoG Edge Detection Results](./results/log/all_log.png)
+<br>
+
+<div align="center">
+  <img src="./results/log/all_log.png" width="70%" alt="LoG Edge Detection Results"/>
+</div>
+
+<div align="center">
+  <em>LoG edge detection results with varying sigma values for multi-scale analysis</em>
+</div>
+
+
+<br>
 
 3. **Circle Detection** (`results/hough/`):
    - Detected circles overlaid on original image
    - Parameter-specific detection results
    - Comparative analysis between edge detectors
+
+<br>
 
 <div align="center">
   <img src="./results/hough/Sobel_Rmin110_Rmax250_Vmin230_NMSc0.9_NMSr0.2.png" width="45%" alt="Sobel-based Circle Detection"/>

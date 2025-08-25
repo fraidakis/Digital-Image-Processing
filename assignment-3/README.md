@@ -169,15 +169,15 @@ This executes the complete segmentation pipeline, generating comprehensive resul
 3. **Comparative Analysis**: Side-by-side comparison of different algorithms
 4. **Parameter Sensitivity**: Analysis of algorithm behavior across parameter ranges
 
-<img src="results/demo3a/d2b.png" alt="Spectral vs N-Cuts clustering results" width="70%">
+<br>
 
-### Quantitative Evaluation
+<div align="center">
+  <img src="results/demo3a/d2b.png" alt="Spectral vs N-Cuts clustering results" width="70%">
+</div>
 
-The implementation includes metrics for objective assessment:
-- **Normalized Cut Value**: Optimization objective evaluation
-- **Silhouette Score**: Cluster quality measurement  
-- **Segment Coherence**: Within-segment similarity analysis
-- **Boundary Quality**: Edge-preserving segmentation assessment
+<div align="center">
+  <em>Example segmentation results comparing spectral clustering and normalized cuts algorithms</em>
+</div>
 
 ---
 
