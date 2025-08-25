@@ -179,6 +179,14 @@ This executes the complete segmentation pipeline, generating comprehensive resul
   <em>Example segmentation results comparing spectral clustering and normalized cuts algorithms</em>
 </div>
 
+## Academic Learning Objectives
+
+This assignment demonstrates:
+1. **Algorithm Implementation**: Developing and implementing advanced segmentation algorithms
+2. **Mathematical Foundations**: Understanding the underlying principles of graph-based segmentation
+3. **Comparative Analysis**: Evaluating the performance of different segmentation techniques
+4. **Parameter Sensitivity**: Analyzing algorithm behavior across parameter ranges
+
 ---
 
 **Course:** Digital Image Processing  
